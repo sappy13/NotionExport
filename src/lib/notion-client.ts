@@ -31,7 +31,8 @@ export class NotionClient {
   async getPageContent(pageId: string): Promise<string> {
     try {
       const mdBlocks = await this.n2m.pageToMarkdown(pageId);
-      return this.n2m.toMarkdownString(mdBlocks).parent;
+      const markdownString = this.n2m.toMarkdownString(mdBlocks);
+      return typeof markdownString === 'string' ? markdownString : markdownString.parent || '';
     } catch (error) {
       console.warn(`Failed to get content for page ${pageId}:`, error);
       return '';

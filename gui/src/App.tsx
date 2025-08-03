@@ -14,6 +14,7 @@ import {
 import { ConfigurationPanel } from './components/ConfigurationPanel';
 import { NotionBrowser } from './components/NotionBrowser';
 import { ExportPanel } from './components/ExportPanel';
+import { LogsPanel } from './components/LogsPanel';
 import { NotionPage } from './types';
 
 const theme = createTheme({
@@ -97,6 +98,7 @@ function App() {
                 label="Export" 
                 disabled={!isConfigured || selectedPages.length === 0}
               />
+              <Tab label="Logs" />
             </Tabs>
           </Box>
 
@@ -114,6 +116,10 @@ function App() {
             {isConfigured && (
               <ExportPanel selectedPages={selectedPages} />
             )}
+          </TabPanel>
+
+          <TabPanel value={currentTab} index={3}>
+            <LogsPanel />
           </TabPanel>
         </Container>
 

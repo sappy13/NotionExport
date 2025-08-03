@@ -24,4 +24,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.on('export-progress', (_, progress) => callback(progress));
     return () => ipcRenderer.removeAllListeners('export-progress');
   },
+
+  // Logging
+  getLogs: () => ipcRenderer.invoke('get-logs'),
+  clearLogs: () => ipcRenderer.invoke('clear-logs'),
+  onLogMessage: (callback: (logEntry: any) => void) => {
+    ipcRenderer.on('log-message', (_, logEntry) => callback(logEntry));
+    return () => ipcRenderer.removeAllListeners('log-message');
+  },
+
+  // Debug
+  debugStoredKeys: () => ipcRenderer.invoke('debug-stored-keys'),
 });

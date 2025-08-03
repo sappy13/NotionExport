@@ -24,7 +24,8 @@ export class FolderBuilder {
     createdPaths.push(pagePath);
 
     const markdownPath = path.join(pagePath, 'content.md');
-    await fs.writeFile(markdownPath, rootPage.content);
+    const content = rootPage.content || '';
+    await fs.writeFile(markdownPath, content);
 
     const metadataPath = path.join(pagePath, 'metadata.json');
     const metadata = {
@@ -66,7 +67,8 @@ export class FolderBuilder {
       createdPaths.push(pagePath);
 
       const markdownPath = path.join(pagePath, 'content.md');
-      await fs.writeFile(markdownPath, page.content);
+      const content = page.content || '';
+      await fs.writeFile(markdownPath, content);
 
       const metadataPath = path.join(pagePath, 'metadata.json');
       const metadata = {
