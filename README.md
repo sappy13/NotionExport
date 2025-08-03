@@ -1,19 +1,19 @@
-# Notion Export
+# Notion Export Tool
 
-A powerful tool to export Notion content into hierarchical folder structures with PDF and DOCX formats. Available as both a command-line interface (CLI) and a desktop GUI application.
+A powerful desktop application for exporting Notion content to hierarchical folder structures with PDF and DOCX formats.
 
 ## Features
 
-- 🖥️ **Desktop GUI Application** - User-friendly interface with browse, select, and export workflow
-- 📄 Export individual Notion pages with all subpages
-- 🗃️ Export entire Notion databases
-- 📁 Creates hierarchical folder structure matching Notion's organization
-- 📋 Exports to both PDF and DOCX formats
-- 🔧 Easy CLI interface with multiple export options
-- 📝 Preserves markdown formatting and metadata
-- 🔍 **Browse and Search** - Search your Notion workspace and select specific pages
-- ⚙️ **Configuration Management** - Secure API key storage and connection testing
-- 📊 **Progress Tracking** - Real-time export progress with detailed results
+- **🔐 Secure API Key Storage**: Encrypted storage using AES-256-CBC encryption with automatic migration
+- **📁 Hierarchical Export**: Maintains Notion page structure in exported folders
+- **📄 Multiple Formats**: Export to PDF and DOCX formats simultaneously
+- **🖥️ Modern GUI**: Electron + React interface with Material-UI components
+- **📊 Real-time Logging**: Comprehensive logging system with dedicated Logs tab for troubleshooting
+- **🔄 Batch Export**: Export multiple pages at once with progress tracking
+- **🌳 Child Page Support**: Option to include or exclude child pages recursively
+- **⚡ Fast Search**: Search and browse your Notion workspace efficiently
+- **🛠️ Debug Tools**: Built-in debugging utilities and comprehensive error handling
+- **💾 Configuration Persistence**: Settings automatically saved between sessions
 
 ## Installation
 
@@ -68,6 +68,8 @@ npm run start:gui
 
 **Using the GUI:**
 1. **Configuration Tab**: Enter your Notion API key and test the connection
+   - API keys are automatically encrypted and stored securely
+   - Connection testing with detailed feedback
 2. **Browse Notion Tab**: Search and browse your Notion workspace
    - Search for pages by title or content
    - Expand page hierarchies to see subpages
@@ -77,6 +79,11 @@ npm run start:gui
    - Select export formats (PDF, DOCX, or both)
    - Choose whether to include subpages
    - Monitor export progress in real-time
+4. **Logs Tab**: Comprehensive application logging and debugging
+   - Real-time log streaming
+   - Filter logs by level (info, warn, error, debug)
+   - Export logs for troubleshooting
+   - Clear logs functionality
 
 ### CLI Usage
 
