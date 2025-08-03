@@ -1,15 +1,19 @@
 # Notion Export
 
-A powerful command-line tool to export Notion content into hierarchical folder structures with PDF and DOCX formats.
+A powerful tool to export Notion content into hierarchical folder structures with PDF and DOCX formats. Available as both a command-line interface (CLI) and a desktop GUI application.
 
 ## Features
 
+- 🖥️ **Desktop GUI Application** - User-friendly interface with browse, select, and export workflow
 - 📄 Export individual Notion pages with all subpages
 - 🗃️ Export entire Notion databases
 - 📁 Creates hierarchical folder structure matching Notion's organization
 - 📋 Exports to both PDF and DOCX formats
 - 🔧 Easy CLI interface with multiple export options
 - 📝 Preserves markdown formatting and metadata
+- 🔍 **Browse and Search** - Search your Notion workspace and select specific pages
+- ⚙️ **Configuration Management** - Secure API key storage and connection testing
+- 📊 **Progress Tracking** - Real-time export progress with detailed results
 
 ## Installation
 
@@ -55,7 +59,30 @@ Or use the `--api-key` option with commands.
 
 ## Usage
 
-### Export a single page
+### GUI Application (Recommended)
+
+Launch the desktop application:
+```bash
+npm run start:gui
+```
+
+**Using the GUI:**
+1. **Configuration Tab**: Enter your Notion API key and test the connection
+2. **Browse Notion Tab**: Search and browse your Notion workspace
+   - Search for pages by title or content
+   - Expand page hierarchies to see subpages
+   - Select multiple pages using checkboxes
+3. **Export Tab**: Configure and run exports
+   - Choose output directory
+   - Select export formats (PDF, DOCX, or both)
+   - Choose whether to include subpages
+   - Monitor export progress in real-time
+
+### CLI Usage
+
+For automation and scripting, use the command-line interface:
+
+#### Export a single page
 ```bash
 # Export page with subpages to PDF and DOCX
 npm start page --page-id <page-id> --output ./exports
@@ -67,7 +94,7 @@ npm start page --page-id <page-id> --formats pdf --output ./my-export
 npm start page --page-id <page-id> --no-subpages
 ```
 
-### Export a database
+#### Export a database
 ```bash
 # Export all pages from a database
 npm start database --database-id <database-id> --output ./exports
@@ -76,7 +103,7 @@ npm start database --database-id <database-id> --output ./exports
 npm start database --database-id <database-id> --formats docx
 ```
 
-### Get help
+#### Get help
 ```bash
 npm start setup    # Interactive setup guide
 npm start --help   # Show all commands
@@ -128,19 +155,40 @@ exports/
 ## Development
 
 ### Scripts
-- `npm run build` - Compile TypeScript
-- `npm run dev` - Run in development mode
+- `npm run build` - Compile TypeScript and build React GUI
+- `npm run start:gui` - Launch the GUI application
+- `npm run dev:gui` - Run GUI in development mode
+- `npm run dev` - Run CLI in development mode
 - `npm run lint` - Run linting
 - `npm run type-check` - Check types without compilation
 
+### GUI Development
+For GUI development, run the React dev server and Electron separately:
+```bash
+# Terminal 1: Start React dev server
+cd gui && npm start
+
+# Terminal 2: Start Electron in dev mode
+npm run dev:electron
+```
+
 ### Architecture
 
+**Core Library:**
 - `src/lib/notion-client.ts` - Notion API integration
 - `src/lib/folder-builder.ts` - Hierarchical folder structure creation
 - `src/exporters/pdf-exporter.ts` - PDF generation using Puppeteer
 - `src/exporters/docx-exporter.ts` - DOCX generation using docx library
 - `src/lib/exporter.ts` - Main export orchestration
 - `src/index.ts` - CLI interface
+
+**GUI Application:**
+- `src/electron/main.ts` - Electron main process
+- `src/electron/preload.ts` - Electron preload script for secure IPC
+- `gui/src/App.tsx` - Main React application
+- `gui/src/components/ConfigurationPanel.tsx` - API key configuration
+- `gui/src/components/NotionBrowser.tsx` - Notion content browser
+- `gui/src/components/ExportPanel.tsx` - Export configuration and execution
 
 ## Requirements
 

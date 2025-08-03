@@ -2,13 +2,20 @@
   "name": "notion-export",
   "version": "1.0.0",
   "description": "Export Notion content to hierarchical folder structure with PDF and DOCX formats",
-  "main": "dist/index.js",
+  "main": "dist/electron/main.js",
+  "homepage": "./",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run build:react",
+    "build:react": "cd gui && npm run build",
     "start": "node dist/index.js",
+    "start:gui": "concurrently \"npm run build\" \"electron dist/electron/main.js\"",
     "dev": "ts-node src/index.ts",
+    "dev:gui": "concurrently \"npm run dev:electron\" \"cd gui && npm start\"",
+    "dev:electron": "tsc && electron dist/electron/main.js --dev",
     "lint": "eslint src/**/*.ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "setup:gui": "cd gui && npm install",
+    "postinstall": "npm run setup:gui"
   },
   "keywords": ["notion", "export", "pdf", "docx"],
   "author": "",
@@ -21,7 +28,9 @@
     "markdown-it": "^14.0.0",
     "fs-extra": "^11.2.0",
     "commander": "^11.1.0",
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "electron": "^28.1.0",
+    "electron-store": "^8.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
@@ -31,6 +40,8 @@
     "ts-node": "^10.9.2",
     "eslint": "^8.56.0",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0"
+    "@typescript-eslint/parser": "^6.15.0",
+    "concurrently": "^8.2.2",
+    "electron-builder": "^24.9.1"
   }
 }
